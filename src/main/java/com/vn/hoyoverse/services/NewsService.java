@@ -11,16 +11,27 @@ import com.vn.hoyoverse.repository.NewsRepository;
 
 @Service
 public class NewsService {
+
     @Autowired
     private NewsRepository repo;
 
+    // ================= LIST =================
+    public List<News> findAllNotDeleted() {
+        return repo.findByDeletedFalseOrderByCreatedDateDesc();
+    }
+
+    // ================= DETAIL =================
+    public Optional<News> findBySlug(String slug) {
+        return repo.findBySlugAndDeletedFalse(slug);
+    }
+
+    // ================= CRUD =================
     public List<News> getAllNews() {
         return repo.findAll();
     }
 
     public News getNewsById(Long id) {
-        Optional<News> news = repo.findById(id);
-        return news.orElse(null);
+        return repo.findById(id).orElse(null);
     }
 
     public News createNews(News news) {
