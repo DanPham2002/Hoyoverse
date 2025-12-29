@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title th:text="${news.title}">Chi tiết bài viết</title>
+
+    <link rel="icon" href="/images/3230261269.png" type="image/x-icon" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/css/News_post.css" />
+</head>
+
+<body>
+    <div id="main">
+
+        <!-- Header -->
+        <div id="header">
+            <div class="header-container">
+                <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
+                    <a href="/home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
+                        <img src="/images/logo-light.3def3bc.png" alt="Hoyoverse" class="logo-company" width="30%" />
+                    </a>
+
+                    <ul class="nav nav-pills">
+                        <li class="nav-item text-header">
+                            <a href="/home" class="nav-link text-white" style="font-size: 20px;">Trang chủ</a>
+                        </li>
+                        <li class="nav-item text-header">
+                            <a href="/news" class="nav-link text-white"
+                                style="font-size: 20px; color: #7bb1ff !important;">Tin tức</a>
+                        </li>
+                        <li class="nav-item text-header">
+                            <a href="/about" class="nav-link text-white" style="font-size: 20px;">
+                                Thông tin về chúng tôi
+                            </a>
+                        </li>
+                    </ul>
+                </header>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div id="content">
+            <div class="container">
+
+                <div class="back-container">
+                    <a href="/news" class="btn-back">
+                        <svg width="30" height="30" fill="currentColor" viewBox="0 0 16 16" style="color:#000;">
+                            <path fill-rule="evenodd"
+                                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                        </svg>
+                    </a>
+                    <span>Quay lại</span>
+                </div>
+
+                <div class="article" th:if="${news != null}">
+
+                    <h2 th:text="${news.title}"></h2>
+
+                    <div class="info-article">
+                        <span class="news-type" th:text="${news.type}" style="font-size:13px;color:#fff;border-radius:20px;
+                          padding:4px 12px;margin:10px 20px;background-color:rgb(94,155,255);">
+                        </span>
+
+                        <span class="date" th:text="${#temporals.format(news.createdDate, 'dd/MM/yyyy')}">
+                        </span>
+                    </div>
+
+                    <div class="background-nav d-flex justify-content-center align-content-center"></div>
+
+                    <div class="article-container">
+
+                        <!-- Nội dung bài viết (HTML từ DB) -->
+                        <div style="margin-top:60px;text-align:justify;" th:utext="${news.content}">
+                        </div>
+
+                        <!-- Ảnh -->
+                        <img th:if="${news.image != null}" th:src="${news.image}" width="100%"
+                            style="border-radius:8px;margin-top:20px;" />
+
+                        <!-- Video -->
+                        <div th:if="${news.video != null}" style="margin-top:20px;">
+                            <video width="100%" controls style="border-radius:8px;">
+                                <source th:src="${news.video}" type="video/mp4" />
+                            </video>
+                        </div>
+
+                    </div>
+
+                    <div class="background-nav d-flex justify-content-center align-content-center"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-item">
+            <footer>
+                <ul class="nav justify-content-center pb-3 mb-3">
+                    <li class="nav-item"><a href="/home" class="nav-link px-2 text-body-secondary">Trang chủ</a></li>
+                    <li class="nav-item"><a href="/news" class="nav-link px-2 text-body-secondary">Tin tức</a></li>
+                    <li class="nav-item"><a href="/about" class="nav-link px-2 text-body-secondary">Thông tin về chúng
+                            tôi</a></li>
+                </ul>
+
+                <img src="/images/logo-light.3def3bc.png" width="20%" />
+                <p class="text-center text-body-secondary mt-3">&copy; 2023 Nhóm 8</p>
+            </footer>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/News_post.js"></script>
+
+</body>
+
+</html>

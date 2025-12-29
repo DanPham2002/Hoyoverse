@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Tin tức | Hoyoverse</title>
+  <link rel="icon" href="/images/3230261269.png" type="image/x-icon" />
+
+  <link rel="stylesheet" href="/bootstrap/cdn.jsdelivr.net_npm_bootstrap@5.3.2_dist_css_bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/News.css" />
+</head>
+
+<body>
+  <div id="main">
+
+    <!-- ================= HEADER ================= -->
+    <div id="header">
+      <div class="header-container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
+          <a th:href="@{/home}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
+            <img src="/images/logo-light.3def3bc.png" alt="Hoyoverse" class="logo-company" width="30%" />
+          </a>
+
+          <ul class="nav nav-pills">
+            <li class="nav-item text-header">
+              <a th:href="@{/home}" class="nav-link text-white" style="font-size:20px;">Trang chủ</a>
+            </li>
+            <li class="nav-item text-header">
+              <a th:href="@{/news}" class="nav-link text-white" style="font-size:20px;color:#7bb1ff !important;">
+                Tin tức
+              </a>
+            </li>
+            <li class="nav-item text-header">
+              <a th:href="@{/about}" class="nav-link text-white" style="font-size:20px;">
+                Thông tin về chúng tôi
+              </a>
+            </li>
+          </ul>
+        </header>
+      </div>
+    </div>
+
+    <!-- ================= CONTENT ================= -->
+    <div id="Content">
+
+      <!-- SLIDE -->
+      <div class="news-slide">
+        <img src="/images/Backgroud-slide-news.jpg" alt="" class="image-slide">
+        <h1 class="text-slide">Tin Tức</h1>
+      </div>
+     
+
+      <!-- MAIN -->
+      <div class="main-content">
+        <div class="news-block-bg">
+        <div class="news-wrapper">
+        <!-- MENU (tĩnh – lọc sau nếu cần) -->
+        <div class="news-option">
+          <p class="news-menu active" data-filter="all">Toàn Bộ</p>
+          <p class="news-menu" data-filter="Sản phẩm">Sản Phẩm</p>
+          <p class="news-menu" data-filter="Công ty">Công Ty</p>
+        </div>
+
+        <!-- ================= LIST NEWS (DYNAMIC) ================= -->
+        <div class="news-selection">
+          <div class="news-content">
+
+            <a class="news-item" th:each="n : ${newsList}" th:href="@{/news/{slug}(slug=${n.slug})}"
+              th:attr="data-type=${n.type}">
+
+              <div class="news-card">
+
+                <img class="image-news" th:src="${(n.image != null && !#strings.isEmpty(n.image))
+       ? n.image
+       : '/images/2de402df9a94cdcdaa96d29781442c15_4453107186343038824.jpeg'}" />
+
+                <div class="news-body">
+
+                  <span class="news-type" th:text="${n.type}"></span>
+
+                  <h3 class="text-caption" th:text="${n.title}"></h3>
+
+                  <span class="date" th:text="${n.createdDate != null
+              ? #temporals.format(n.createdDate, 'dd.MM.yyyy')
+              : ''}">
+                  </span>
+
+                </div>
+              </div>
+
+            </a>
+
+          </div>
+        </div>
+
+        <!-- EMPTY STATE -->
+        <div th:if="${#lists.isEmpty(newsList)}" style="text-align:center;margin:60px 0;font-size:18px;">
+          Hiện chưa có bài viết nào.
+        </div>
+
+        <!-- LOAD MORE (sau làm phân trang) -->
+        <div class="d-flex justify-content-center align-items-center mt-4">
+          <button class="btn-more">Xem thêm</button>
+        </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <div class="footer-item">
+      <footer>
+        <ul class="nav justify-content-center pb-3 mb-3">
+          <li class="nav-item"><a th:href="@{/home}" class="nav-link px-2 text-body-secondary">Trang chủ</a></li>
+          <li class="nav-item"><a th:href="@{/news}" class="nav-link px-2 text-body-secondary">Tin tức</a></li>
+          <li class="nav-item"><a th:href="@{/about}" class="nav-link px-2 text-body-secondary">Thông tin về chúng
+              tôi</a></li>
+        </ul>
+
+        <img src="/images/logo-light.3def3bc.png" width="20%" />
+        <p class="text-center text-body-secondary mt-3">&copy; 2023 Nhóm 8</p>
+      </footer>
+    </div>
+
+  </div>
+
+  <!-- JS -->
+  <script src="/assets/bootstrap/cdn.jsdelivr.net_npm_bootstrap@5.3.2_dist_js_bootstrap.bundle.min.js"></script>
+  <script src="/src/main/resources/static/js/News.js"></script>
+</body>
+
+</html>

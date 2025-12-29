@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Không tìm thấy bài viết</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .box {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,.1);
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 18px;
+            background: #4a90e2;
+            color: #fff;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+        a:hover {
+            background: #357bd8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h1>404</h1>
+    <p>Bài viết không tồn tại hoặc đã bị xóa.</p>
+
+    <a href="javascript:history.back()">⬅ Quay lại</a>
+    <br><br>
+    <a th:href="@{/news}">📄 Danh sách tin tức</a>
+</div>
+
+</body>
+</html>

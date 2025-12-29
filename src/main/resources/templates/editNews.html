@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chỉnh sửa bài viết</title>
+    <link rel="stylesheet" href="/css/EditNews.css">
+</head>
+
+<body>
+
+    <div class="container" th:if="${news != null}">
+        <h2>Chỉnh sửa bài viết</h2>
+
+        <form th:action="@{/updateNews}" method="post">
+
+            <!-- ID -->
+            <input type="hidden" name="id" th:value="${news.id}" />
+
+            <!-- TITLE -->
+            <label for="title">Tiêu đề:</label>
+            <input type="text" id="title" name="title" th:value="${news.title}" required />
+            <br>
+
+            <!-- CONTENT -->
+            <label for="content">Nội dung:</label>
+            <textarea id="content" name="content" rows="6" required th:text="${news.content}">
+        </textarea>
+            <br>
+
+            <!-- TYPE -->
+            <label for="type">Loại:</label>
+            <input type="text" id="type" name="type" th:value="${news.type}" required />
+            <br>
+
+            <!-- CREATED DATE
+            <label for="createdDate">Ngày tạo:</label>
+            <input type="datetime-local" id="createdDate" name="createdDate"
+                th:value="${#temporals.format(news.createdDate, 'yyyy-MM-dd''T''HH:mm')}" required />
+            <br> -->
+            <input type="datetime-local" id="createdDate" name="createdDate" th:value="${#temporals.format(T(java.time.LocalDateTime).now(),
+                                     'yyyy-MM-dd''T''HH:mm')}" required />
+
+
+            <!-- IMAGE -->
+            <label for="image">Ảnh (URL):</label>
+            <input type="text" id="image" name="image" th:value="${news.image}" />
+            <br>
+
+            <!-- VIDEO -->
+            <label for="video">Video (URL):</label>
+            <input type="text" id="video" name="video" th:value="${news.video}" />
+            <br>
+
+            <button type="submit">💾 Cập nhật bài viết</button>
+            <a th:href="@{/news_admin}" style="margin-left:10px;">⬅ Hủy</a>
+
+        </form>
+    </div>
+
+    <!-- Trường hợp không có dữ liệu -->
+    <div class="container" th:if="${news == null}">
+        <h2>Bài viết không tồn tại</h2>
+        <a th:href="@{/news_admin}">⬅ Quay lại</a>
+    </div>
+
+</body>
+
+</html>

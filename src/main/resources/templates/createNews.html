@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thêm bài viết mới</title>
+    <link rel="stylesheet" href="/css/EditNews.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Thêm bài viết mới</h2>
+
+        <form th:action="@{/createNews}" method="post">
+
+            <!-- TITLE -->
+            <label for="title">Tiêu đề:</label>
+            <input type="text" id="title" name="title" required />
+            <br>
+
+            <!-- CONTENT -->
+            <label for="content">Nội dung:</label>
+            <textarea id="content" name="content" rows="6" required></textarea>
+            <br>
+
+            <!-- TYPE -->
+            <label for="type">Loại:</label>
+            <input type="text" id="type" name="type" required />
+            <br>
+
+            <!-- CREATED DATE -->
+            <label for="createdDate">Ngày tạo:</label>
+            <input type="datetime-local" id="createdDate" name="createdDate" required />
+            <br>
+
+            <!-- IMAGE -->
+            <label for="image">Ảnh (URL):</label>
+            <input type="text" id="image" name="image" />
+            <br>
+
+            <!-- VIDEO -->
+            <label for="video">Video (URL):</label>
+            <input type="text" id="video" name="video" />
+            <br>
+
+            <button type="submit">➕ Thêm bài viết</button>
+            <a th:href="@{/news_admin}" style="margin-left:10px;">⬅ Hủy</a>
+
+        </form>
+    </div>
+
+</body>
+
+</html>
